@@ -37,3 +37,14 @@ aws eks update-kubeconfig --name <<YOUR_CLUSTER>> --verbose
 # run deployment to eks cluster
 kubectl apply -f .
 ```
+
+## Logging
+Using [fluent-bit](https://github.com/aws/aws-for-fluent-bit) for collecting pod's log to cloudwatch </br>
+deploy `fluent-bit` as a daemonset app
+```sh
+kubectl get daemonset -n kube-system
+NAME         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+aws-node     1         1         1       1            1           <none>          12h
+fluentd      1         1         1       1            1           <none>          30s
+kube-proxy   1         1         1       1            1           <none>          12h
+```
