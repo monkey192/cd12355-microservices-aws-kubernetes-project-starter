@@ -8,7 +8,7 @@ helm install postgresql bitnami/postgresql --set primary.persistence.enabled=fal
 ```
 
 ### **Initiate database**
-After installing helm chart to `eks` successfully. Run the bellow command instruction to initiate database schema and data
+- After installing helm chart to `eks` successfully. Run the bellow command instruction to initiate database schema and data
 ```sh
 # goto db folder
 cd ../db
@@ -18,6 +18,8 @@ PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p
 PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432 < 2_seed_users.sql
 PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432 < 3_seed_tokens.sql
 ```
+- result: </br>
+![postgres](../evidence/postgress_db.png)
 
 ## Deployment Application
 - build and push docker image to `AWS ECR` through `AWS CodeBuild`
