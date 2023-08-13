@@ -24,9 +24,10 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - IMAGE_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - echo $IMAGE_URI
       - docker push $IMAGE_URI
       - cd deployment
-      - sed -i -e "s/<IMAGE_NAME>/`echo ${IMAGE_URI}`/g" deployment.yaml
+      - sed -i -e "s/<CONTAINER_IMAGE_NAME>/`echo ${IMAGE_URI}`/g" deployment.yaml
       - cat deployment.yaml
       - echo Updating eks deployment...
       - aws eks update-kubeconfig --name ${EKS_CLUSTER_NAME} --verbose

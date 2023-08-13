@@ -20,7 +20,7 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-          image: <IMAGE_NAME>
+          image: <CONTAINER_IMAGE_NAME>
           livenessProbe:
             httpGet:
               path: /health_check
