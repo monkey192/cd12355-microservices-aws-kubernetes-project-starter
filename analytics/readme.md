@@ -19,12 +19,12 @@ PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p
 PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432 < 3_seed_tokens.sql
 ```
 - result: </br>
-![postgres](../evidence/postgress_db.png)
+![postgres](../evidence/02-postgress_db.png)
 
 ## Deployment Application
 - build and push docker image to `AWS ECR` through `AWS CodeBuild`
 - Application will be deployed to `AWS EKS`
-- Every time there is a commit to `main` branch, sourcecode will be build and deploy to `eks` </br>
+- Every time there is a commit to `main` branch and file in `analytics` folder was changed, sourcecode will be build and deploy to `eks` </br>
 please refer to [buildspec.yaml](./buildspec.yml)
 </br> or you can deploy from your local pc by using the bellow command
 ```sh
@@ -40,11 +40,9 @@ kubectl apply -f .
 
 ## Logging
 Using [fluent-bit](https://github.com/aws/aws-for-fluent-bit) for collecting pod's log to cloudwatch </br>
-deploy `fluent-bit` as a daemonset app
+Follow [Set up Fluent Bit as a DaemonSet to send logs to CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-setup-logs-FluentBit.html#Container-Insights-FluentBit-setup)
 ```sh
-kubectl get daemonset -n kube-system
+kubectl get daemonset -n amazon-cloudwatch
 NAME         DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-aws-node     1         1         1       1            1           <none>          12h
-fluentd      1         1         1       1            1           <none>          30s
-kube-proxy   1         1         1       1            1           <none>          12h
+fluent-bit   1         1         1       1            1           <none>          2m46s
 ```
