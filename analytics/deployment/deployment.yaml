@@ -20,7 +20,7 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-          image: 276853974203.dkr.ecr.us-east-1.amazonaws.com/udacity-analytics:7313a7d
+          image: <<IMAGE_NAME>>
           ports:
             - containerPort: 5153
           env:
