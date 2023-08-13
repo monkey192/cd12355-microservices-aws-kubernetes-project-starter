@@ -21,6 +21,12 @@ spec:
               memory: "128Mi"
               cpu: "500m"
           image: <IMAGE_NAME>
+          livenessProbe:
+            httpGet:
+              path: /health_check
+              port: 5153
+            initialDelaySeconds: 3
+            periodSeconds: 3
           ports:
             - containerPort: 5153
           env:
