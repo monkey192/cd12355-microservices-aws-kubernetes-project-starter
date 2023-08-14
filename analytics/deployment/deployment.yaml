@@ -47,9 +47,9 @@ spec:
                   key: DB_NAME
             - name: DB_USERNAME
               valueFrom:
-                configMapKeyRef:
-                  name: analytics-cm
-                  key: DB_USERNAME
+                secretKeyRef:
+                  name: postgresdb
+                  key: db_username
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
